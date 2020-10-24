@@ -6,6 +6,10 @@
 int main(void)
 {
     UNITY_BEGIN();
+
+    /* HANDLE module */
+    RUN_TEST(UT_HANDLE_Alloc_ByDefaultZeroHandleIsReturned);
+
     return UNITY_END();
 }
 
