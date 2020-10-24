@@ -1,15 +1,12 @@
 language: C
-
 os: linux
 dist: xenial
-
 script:
 - mkdir -p build
 - cd build
 - cmake ..
 - make
 - make test
-
 after_success:
 - cd ..
 - cd scripts
@@ -18,5 +15,4 @@ after_success:
 
 env:
   global:
-    secure: IpaFobwiDpHQiYSXYqB6r15XQ3d43zIvNj69GwbAanaSq/vlEj9y2nYv/cruHTVIsIeTM2on3kHPzBmPlz00luCM83ddeg/ZDMwlE/mb5EHPl4+bRnoFiDXcfSrlt0J2RklgQHMl36+zWCiUqaZksFtqJ9EBdX2Cvjo+IUVr6m/Wyw4VRoDg4ToE8QqVkhiU0HwYGKzskq8XmwYRDZsH/IAaY8cGPd27Ybtrq2Ee8rVmD/gOJtinvu9JhdepXtNzvR38PMOBftTtAs7s13TsIfEGBXtS50lMaRqqzrh85CM8QKtvQyvsdEqiFRe8etENm/2nI6h5/hJjGz55skT3WkcZrBL+UWDmbdP8U02GABZ1fedHkoI3DgeShvHtnbRBCZ40/0yzTer4qLOYAosMnxskcFeCECFo4/YPp2DPajWdkQqTGkfrDNSpFoc2FVfmxOtO4hwHG7BGv7T8Mo+0pw2pxIleRD2p398lwSgZh1lzPpObtwAvjKRMsdvnadn8SxYHrZjXNgO09WpG9oFaFTR4rYO9pQGJ8BGXUNo8O8PSz/qpGvZicNkOa+qVg5cyZmRpU2v4pEtqLBYC6lmnchMWcODWqJxmflLS3qgpDzNbAcyQKvAw3ILgbmaZARlr5g//4927BZg1+gJ5nt6wWY6ZEf5WhN6nYl+uZPDGzBA=
-
+    secure: b2/XwqBcXqXFWBdpJmJqFIGx9G10BLORUi6qKjELx2no2AHJT3ItktHZgsxIgK9hgrWxm3YegQI2KD3G+ew0EVRPFll2fUW+M2AMi27IwR9BRCqrA4XQajTVY16ZgTpz0DfMxaAY29P+fPLwTyOqG1wvJxatHNxMFTIXOVxpeP0U1uOkeQHlQU53oVzWw9PuIqMNmkv+vPCCP7vDzmyTwmFJoYix94svFd2vxxPQfD68cIbzGpsIbdKedpEwrE972D5AsqPhU7gDWcHSIGSsWSVOlKd++caSnOfp6Rzr3VTdOlna/zNORNXZ3Y/ekE3QHPlsCM2CLVGII9+0n8ytRueAyMMJ60u0SelzMaCWEQzz76g2HHecP8+pn9vnWr9lJLAaE0NKr0h2139O183ulVjuRzQ0iw12hFuEmGNCEBBpOf7HfPIHNc3QqR8fs137BI6uEonLMIGJpswdtth8uZA92QCHAEq9dCyS8wHA6c0Qk6F9NQzh40DQLQ26FygqrMTLLXjvOCuMR4Mr0sWlLzhJ+AC5VR3QMqd/Y3+9m1x3F/YXqO+y7Nzm2tlwldG3+V6nGJ1MNnkNSppJPSzyyxVne2cpjFj6wprCWTPHGIgKyVC/NofLsa8ivC1r3E5CXC4eiE7X3Fj9r/yt+ArTfIZc/2U+h9N8WZtU76MUi7Q=
