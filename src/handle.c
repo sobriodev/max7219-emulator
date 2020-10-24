@@ -55,6 +55,10 @@ void HANDLE_Init(void)
 
 HANDLE_Status HANDLE_Alloc(HANDLE_Id* handle, size bytes)
 {
+    if (handle == NULL) {
+        return HANDLE_StatusNullPtr;
+    }
+
     HandleToMemoryMapping* entry = FindFirstEmptyLutEntry();
     entry->memory = malloc(bytes);
     entry->occupied = true;

@@ -21,7 +21,8 @@ extern "C" {
 /** An enum to represent status codes for module */
 typedef enum
 {
-    HANDLE_StatusOk = 0 /**< OK */
+    HANDLE_StatusOk = 0, /**< OK */
+    HANDLE_StatusNullPtr /** < Null pointer was passed to API function */
 } HANDLE_Status;
 
 /** Handle instance */

@@ -39,3 +39,11 @@ void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void)
     }
     /* TODO Call dealloc function after test */
 }
+
+void UT_HANDLE_Alloc_NothingIsDoneWhenNullPointerIsPassed(void)
+{
+    HANDLE_Status status;
+    status = HANDLE_Alloc(NULL, sizeof(u8));
+
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusNullPtr, status);
+}
