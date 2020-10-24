@@ -81,3 +81,4 @@ unit_test/CMakeFiles/
 unit_test/cmake_install.cmake
 CMakeFiles/
 max7219-emulator
+unit_test/unit_test
