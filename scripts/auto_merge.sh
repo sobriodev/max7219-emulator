@@ -11,5 +11,5 @@ if echo $commit_message | grep -q "$commit_message_regex"; then
     chmod a+x /tmp/travis-automerge
     BRANCHES_TO_MERGE_REGEX="" BRANCH_TO_MERGE_INTO=develop GITHUB_REPO=sobriodev/max7219-emulator /tmp/travis-automerge
 else
-    echo "Commit message does not fullfill merge requirements. Aborting"
+    echo "Commit message does not fullfill merge requirements. No operation performed"
 fi
