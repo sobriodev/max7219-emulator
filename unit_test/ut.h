@@ -20,6 +20,7 @@ extern "C" {
 
 /* HANDLE module */
 void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void);
+void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void);
 
 #if defined(__cplusplus)
 }

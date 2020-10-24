@@ -9,6 +9,7 @@ int main(void)
 
     /* HANDLE module */
     RUN_TEST(UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned);
+    RUN_TEST(UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder);
 
     return UNITY_END();
 }
