@@ -12,7 +12,7 @@
 /* ---------------------------------- Tests --------------------------------- */
 /* -------------------------------------------------------------------------- */
 
-void UT_HANDLE_Alloc_ByDefaultZeroHandleIsReturned(void)
+void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void)
 {
     HANDLE_Id handle;
     HANDLE_Status status = HANDLE_Alloc(&handle, sizeof(u32));

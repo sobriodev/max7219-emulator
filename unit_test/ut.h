@@ -19,7 +19,7 @@ extern "C" {
 /* -------------------------------------------------------------------------- */
 
 /* HANDLE module */
-void UT_HANDLE_Alloc_ByDefaultZeroHandleIsReturned(void);
+void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void);
 
 #if defined(__cplusplus)
 }
