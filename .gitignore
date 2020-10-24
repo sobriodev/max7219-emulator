@@ -73,3 +73,11 @@ Thumbs.db
 
 # Project specific
 CMakeLists.txt.user
+CMakeCache.txt
+CTestTestfile.cmake
+Testing/
+cmake_install.cmake
+unit_test/CMakeFiles/
+unit_test/cmake_install.cmake
+CMakeFiles/
+max7219-emulator
