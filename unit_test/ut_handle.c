@@ -108,3 +108,11 @@ void UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed(void)
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, deallocStatus);
     TEST_ASSERT_HANDLE_EQ(HANDLE_INVALID, handle);
 }
+
+void UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed(void)
+{
+    HANDLE_Status status;
+    status = HANDLE_Dealloc(NULL);
+
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusNullPtr, status);
+}

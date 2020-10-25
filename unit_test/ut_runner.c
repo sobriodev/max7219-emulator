@@ -14,6 +14,7 @@ int main(void)
     RUN_TEST(UT_HANDLE_AllocWithAllocator_AllocErrReturnedWhenAllocFnFails);
     RUN_TEST(UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed);
     RUN_TEST(UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed);
+    RUN_TEST(UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed);
 
     return UNITY_END();
 }

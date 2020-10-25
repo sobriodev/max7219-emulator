@@ -25,6 +25,7 @@ void UT_HANDLE_Alloc_NothingIsDoneWhenNullPointerIsPassed(void);
 void UT_HANDLE_AllocWithAllocator_AllocErrReturnedWhenAllocFnFails(void);
 void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed(void);
+void UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed(void);
 
 #if defined(__cplusplus)
 }

@@ -92,6 +92,8 @@ HANDLE_Status HANDLE_AllocWithAllocator(
 
 HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
 {
+    COMMON_NULLPTR_GUARD(handle, HANDLE_StatusNullPtr);
+
     HandleToMemoryMapping* entry = FindLutEntry(*handle);
 
     /* Free memory and clean up fields */
