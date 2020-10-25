@@ -16,6 +16,9 @@ extern "C" {
 /* Default size for look-up table */
 #define HANDLE_LUT_DEFAULT_SIZE 10
 
+/* Macro to indicate invalid handle */
+#define HANDLE_INVALID -1
+
 /* -------------------------------------------------------------------------- */
 /* -------------------------------- Data types ------------------------------ */
 /* -------------------------------------------------------------------------- */
@@ -29,7 +32,7 @@ typedef enum
 } HANDLE_Status;
 
 /** Handle instance */
-typedef u64 HANDLE_Id;
+typedef i64 HANDLE_Id;
 
 /** Memory allocation function type */
 typedef void* (*HANDLE_MemAllocator)(size bytes);

@@ -47,6 +47,11 @@ static HandleToMemoryMapping* FindLutEntry(HANDLE_Id handle)
     return lutEntry;
 }
 
+static inline void InvalidateHandle(HANDLE_Id* handle)
+{
+    *handle = HANDLE_INVALID;
+}
+
 /* -------------------------------------------------------------------------- */
 /* ------------------------------- API functions ---------------------------- */
 /* -------------------------------------------------------------------------- */
@@ -88,8 +93,14 @@ HANDLE_Status HANDLE_AllocWithAllocator(
 HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
 {
     HandleToMemoryMapping* entry = FindLutEntry(*handle);
+
+    /* Free memory and clean up fields */
     free(entry->memory);
+    entry->memory = NULL;
     entry->occupied = false;
-    /* TODO invalidate handle value */
+
+    /* Invalidate handle */
+    InvalidateHandle(handle);
+
     return HANDLE_StatusOk;
 }

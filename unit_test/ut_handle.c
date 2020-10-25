@@ -6,7 +6,7 @@
 /* ------------------------------ Private macros ---------------------------- */
 /* -------------------------------------------------------------------------- */
 
-#define TEST_ASSERT_HANDLE_EQ(EXP, ACT) TEST_ASSERT_EQUAL_UINT64((EXP), (ACT))
+#define TEST_ASSERT_HANDLE_EQ(EXP, ACT) TEST_ASSERT_EQUAL_INT64((EXP), (ACT))
 
 /* -------------------------------------------------------------------------- */
 /* ---------------------------- Private functions --------------------------- */
@@ -94,4 +94,17 @@ void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void)
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, status);
 
     HANDLE_Dealloc(&handle);
+}
+
+void UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed(void)
+{
+    HANDLE_Init();
+
+    HANDLE_Id handle = HANDLE_INVALID;
+    HANDLE_Status allocStatus = HANDLE_Alloc(&handle, sizeof(u32));
+    HANDLE_Status deallocStatus = HANDLE_Dealloc(&handle);
+
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, allocStatus);
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, deallocStatus);
+    TEST_ASSERT_HANDLE_EQ(HANDLE_INVALID, handle);
 }
