@@ -29,10 +29,10 @@ HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
     for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
         lutEntry = &handleToMemoryLut[i];
         if (!lutEntry->occupied) {
-            break;
+            return lutEntry;
         }
     }
-    return lutEntry;
+    return NULL;
 }
 
 static HandleToMemoryMapping* FindLutEntry(HANDLE_Id handle)
@@ -41,10 +41,10 @@ static HandleToMemoryMapping* FindLutEntry(HANDLE_Id handle)
     for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
         lutEntry = &handleToMemoryLut[i];
         if (handle == lutEntry->handle) {
-            break;
+            return lutEntry;
         }
     }
-    return lutEntry;
+    return NULL;
 }
 
 static inline void InvalidateHandle(HANDLE_Id* handle)
@@ -95,6 +95,7 @@ HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
     COMMON_NULLPTR_GUARD(handle, HANDLE_StatusNullPtr);
 
     HandleToMemoryMapping* entry = FindLutEntry(*handle);
+    COMMON_NULLPTR_GUARD(entry, HANDLE_StatusWrongHandle);
 
     /* Free memory and clean up fields */
     free(entry->memory);

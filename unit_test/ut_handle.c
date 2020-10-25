@@ -116,3 +116,14 @@ void UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed(void)
 
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusNullPtr, status);
 }
+
+void UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed(void)
+{
+    HANDLE_Init();
+
+    HANDLE_Id someHugeHandle = 0xFFFF;
+    HANDLE_Status status;
+    status = HANDLE_Dealloc(&someHugeHandle);
+
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusWrongHandle, status);
+}
