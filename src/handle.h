@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#include <stdlib.h>
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -21,19 +23,32 @@ extern "C" {
 /** An enum to represent status codes for module */
 typedef enum
 {
-    HANDLE_StatusOk = 0, /**< OK */
-    HANDLE_StatusNullPtr /** < Null pointer was passed to API function */
+    HANDLE_StatusOk = 0,  /**< OK */
+    HANDLE_StatusNullPtr, /**< Null pointer was passed to API function */
+    HANDLE_StatusMemError /**< Memory allocation errror */
 } HANDLE_Status;
 
 /** Handle instance */
 typedef u64 HANDLE_Id;
+
+/** Memory allocation function type */
+typedef void* (*HANDLE_MemAllocator)(size bytes);
 
 /* -------------------------------------------------------------------------- */
 /* ------------------------------- API functions ---------------------------- */
 /* -------------------------------------------------------------------------- */
 
 void HANDLE_Init(void);
-HANDLE_Status HANDLE_Alloc(HANDLE_Id* handle, size bytes);
+
+HANDLE_Status HANDLE_AllocWithAllocator(
+        HANDLE_Id* handle,
+        size bytes,
+        HANDLE_MemAllocator allocator);
+
+static inline HANDLE_Status HANDLE_Alloc(HANDLE_Id* handle, size bytes)
+{
+    return HANDLE_AllocWithAllocator(handle, bytes, malloc);
+}
 
 #if defined(__cplusplus)
 }

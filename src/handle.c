@@ -1,7 +1,5 @@
 #include "handle.h"
 
-#include <stdlib.h>
-
 /* -------------------------------------------------------------------------- */
 /* ---------------------------- Private data types -------------------------- */
 /* -------------------------------------------------------------------------- */
@@ -53,14 +51,22 @@ void HANDLE_Init(void)
     }
 }
 
-HANDLE_Status HANDLE_Alloc(HANDLE_Id* handle, size bytes)
+HANDLE_Status HANDLE_AllocWithAllocator(
+        HANDLE_Id* handle,
+        size bytes,
+        HANDLE_MemAllocator allocator)
 {
     if (handle == NULL) {
         return HANDLE_StatusNullPtr;
     }
 
     HandleToMemoryMapping* entry = FindFirstEmptyLutEntry();
-    entry->memory = malloc(bytes);
+    entry->memory = allocator(bytes);
+
+    if (entry->memory == NULL) {
+        return HANDLE_StatusMemError;
+    }
+
     entry->occupied = true;
 
     *handle = entry->handle;
