@@ -12,6 +12,7 @@ int main(void)
     RUN_TEST(UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder);
     RUN_TEST(UT_HANDLE_Alloc_NothingIsDoneWhenNullPointerIsPassed);
     RUN_TEST(UT_HANDLE_AllocWithAllocator_AllocErrReturnedWhenAllocFnFails);
+    RUN_TEST(UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed);
 
     return UNITY_END();
 }

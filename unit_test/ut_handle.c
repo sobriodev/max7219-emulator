@@ -72,3 +72,26 @@ void UT_HANDLE_AllocWithAllocator_AllocErrReturnedWhenAllocFnFails(void)
     TEST_ASSERT_HANDLE_EQ(0xABCD, handle);
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusMemError, status);
 }
+
+void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void)
+{
+    HANDLE_Init();
+
+    HANDLE_Id handle;
+    HANDLE_Alloc(&handle, sizeof(i32));
+
+    /* Dealloc handle */
+    HANDLE_Status status;
+    status = HANDLE_Dealloc(&handle);
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, status);
+
+    /* TODO Change magic number to some constant */
+    handle = 0xFFFF;
+    status = HANDLE_Alloc(&handle, 10 * sizeof(u8));
+
+    /* Eventually check if the handle is reused after freeing */
+    TEST_ASSERT_HANDLE_EQ(0, handle);
+    TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, status);
+
+    HANDLE_Dealloc(&handle);
+}

@@ -35,6 +35,18 @@ HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
     return lutEntry;
 }
 
+static HandleToMemoryMapping* FindLutEntry(HANDLE_Id handle)
+{
+    HandleToMemoryMapping *lutEntry = NULL;
+    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
+        lutEntry = &handleToMemoryLut[i];
+        if (handle == lutEntry->handle) {
+            break;
+        }
+    }
+    return lutEntry;
+}
+
 /* -------------------------------------------------------------------------- */
 /* ------------------------------- API functions ---------------------------- */
 /* -------------------------------------------------------------------------- */
@@ -70,5 +82,14 @@ HANDLE_Status HANDLE_AllocWithAllocator(
     entry->occupied = true;
 
     *handle = entry->handle;
+    return HANDLE_StatusOk;
+}
+
+HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
+{
+    HandleToMemoryMapping* entry = FindLutEntry(*handle);
+    free(entry->memory);
+    entry->occupied = false;
+    /* TODO invalidate handle value */
     return HANDLE_StatusOk;
 }

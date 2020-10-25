@@ -50,6 +50,8 @@ static inline HANDLE_Status HANDLE_Alloc(HANDLE_Id* handle, size bytes)
     return HANDLE_AllocWithAllocator(handle, bytes, malloc);
 }
 
+HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle);
+
 #if defined(__cplusplus)
 }
 #endif

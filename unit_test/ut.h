@@ -23,6 +23,7 @@ void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void);
 void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void);
 void UT_HANDLE_Alloc_NothingIsDoneWhenNullPointerIsPassed(void);
 void UT_HANDLE_AllocWithAllocator_AllocErrReturnedWhenAllocFnFails(void);
+void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void);
 
 #if defined(__cplusplus)
 }
