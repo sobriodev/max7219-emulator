@@ -17,13 +17,13 @@ typedef struct
 /* -------------------------------------------------------------------------- */
 
 /* Handle to memory look-up table */
-HandleToMemoryMapping handleToMemoryLut[HANDLE_LUT_DEFAULT_SIZE] = {0};
+static HandleToMemoryMapping handleToMemoryLut[HANDLE_LUT_DEFAULT_SIZE] = {0};
 
 /* -------------------------------------------------------------------------- */
 /* ----------------------------- Private functions -------------------------- */
 /* -------------------------------------------------------------------------- */
 
-HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
+static HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
 {
     HandleToMemoryMapping *lutEntry = NULL;
     for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
@@ -65,6 +65,7 @@ void HANDLE_Init(void)
         /* First time settings */
         lutEntry->handle = i;
         lutEntry->occupied = false;
+        lutEntry->memory = NULL;
     }
 }
 
@@ -73,16 +74,14 @@ HANDLE_Status HANDLE_AllocWithAllocator(
         size bytes,
         HANDLE_MemAllocator allocator)
 {
-    if (handle == NULL) {
-        return HANDLE_StatusNullPtr;
-    }
+    COMMON_NULLPTR_GUARD(handle, HANDLE_StatusNullPtr);
 
     HandleToMemoryMapping* entry = FindFirstEmptyLutEntry();
     entry->memory = allocator(bytes);
 
-    if (entry->memory == NULL) {
-        return HANDLE_StatusMemError;
-    }
+    /* TODO check for NULL and eventually extend lut memory */
+
+    COMMON_NULLPTR_GUARD(entry->memory, HANDLE_StatusMemError);
 
     entry->occupied = true;
 
