@@ -32,7 +32,9 @@ void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void)
 
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, status);
     TEST_ASSERT_HANDLE_EQ(0, handle);
-    /* TODO Call dealloc function after test */
+
+    /* Dealloc handle to prevent memory leaks */
+    HANDLE_Dealloc(&handle);
 }
 
 void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void)
@@ -48,7 +50,12 @@ void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void)
         TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, status);
         TEST_ASSERT_HANDLE_EQ(i, handle);
     }
-    /* TODO Call dealloc function after test */
+
+    /* Dealloc handles to prevent memory leaks */
+    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
+        handle = i;
+        HANDLE_Dealloc(&handle);
+    }
 }
 
 void UT_HANDLE_Alloc_NothingIsDoneWhenNullPointerIsPassed(void)
@@ -63,13 +70,12 @@ void UT_HANDLE_AllocWithAllocator_AllocErrReturnedWhenAllocFnFails(void)
 {
     HANDLE_Init();
 
-    /* Give some default value to check if the handle will not be modified */
-    HANDLE_Id handle = 0xABCD;
+    HANDLE_Id handle = HANDLE_INVALID;
 
     HANDLE_Status status;
     status = HANDLE_AllocWithAllocator(&handle, sizeof(u64), FailureAllocator);
 
-    TEST_ASSERT_HANDLE_EQ(0xABCD, handle);
+    TEST_ASSERT_HANDLE_EQ(HANDLE_INVALID, handle);
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusMemError, status);
 }
 
@@ -80,14 +86,9 @@ void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void)
     HANDLE_Id handle;
     HANDLE_Alloc(&handle, sizeof(i32));
 
-    /* Dealloc handle */
-    HANDLE_Status status;
-    status = HANDLE_Dealloc(&handle);
-    TEST_ASSERT_STATUS_EQ(HANDLE_StatusOk, status);
-
-    /* TODO Change magic number to some constant */
-    handle = 0xFFFF;
-    status = HANDLE_Alloc(&handle, 10 * sizeof(u8));
+    /* Dealloc handle and alloc second time */
+    HANDLE_Dealloc(&handle);
+    HANDLE_Status status = HANDLE_Alloc(&handle, 10 * sizeof(u8));
 
     /* Eventually check if the handle is reused after freeing */
     TEST_ASSERT_HANDLE_EQ(0, handle);
