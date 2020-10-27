@@ -12,6 +12,10 @@ extern "C" {
 /* ------------ Naming convention: UT_{MODULE}_{FUNCTION}_{CONDITION} ------- */
 /* -------------------------------------------------------------------------- */
 
+/* Put tests declaration here */
+
+/* End of the tests declaration */
+
 #if defined(__cplusplus)
 }
 #endif
