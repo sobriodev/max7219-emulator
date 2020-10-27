@@ -23,6 +23,19 @@ static HandleToMemoryMapping handleToMemoryLut[HANDLE_LUT_DEFAULT_SIZE] = {0};
 /* ----------------------------- Private functions -------------------------- */
 /* -------------------------------------------------------------------------- */
 
+static void LutInit(HandleToMemoryMapping* lut, size sizeOfLut)
+{
+    HandleToMemoryMapping *lutEntry;
+    for (size i = 0; i < sizeOfLut; ++i) {
+        lutEntry = &lut[i];
+
+        /* First time settings */
+        lutEntry->handle = i;
+        lutEntry->occupied = false;
+        lutEntry->memory = NULL;
+    }
+}
+
 static HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
 {
     HandleToMemoryMapping *lutEntry = NULL;
@@ -58,15 +71,7 @@ static inline void InvalidateHandle(HANDLE_Id* handle)
 
 void HANDLE_Init(void)
 {
-    HandleToMemoryMapping *lutEntry;
-    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
-        lutEntry = &handleToMemoryLut[i];
-
-        /* First time settings */
-        lutEntry->handle = i;
-        lutEntry->occupied = false;
-        lutEntry->memory = NULL;
-    }
+    LutInit(handleToMemoryLut, HANDLE_LUT_DEFAULT_SIZE);
 }
 
 HANDLE_Status HANDLE_AllocWithAllocator(
