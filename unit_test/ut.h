@@ -18,6 +18,8 @@ extern "C" {
 /* ------------ Naming convention: UT_{MODULE}_{FUNCTION}_{CONDITION} ------- */
 /* -------------------------------------------------------------------------- */
 
+/* Put tests declaration here */
+
 /* HANDLE module */
 void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void);
 void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void);
@@ -27,6 +29,8 @@ void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed(void);
 void UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed(void);
+
+/* End of the tests declaration */
 
 #if defined(__cplusplus)
 }
