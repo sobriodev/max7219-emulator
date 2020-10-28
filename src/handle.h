@@ -58,6 +58,8 @@ HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle);
 
 size HANDLE_CountFree(void);
 
+size HANDLE_CountAll(void);
+
 #if defined(__cplusplus)
 }
 #endif

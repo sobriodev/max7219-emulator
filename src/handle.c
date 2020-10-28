@@ -123,3 +123,8 @@ size HANDLE_CountFree(void)
 
     return freeHandles;
 }
+
+size HANDLE_CountAll(void)
+{
+    return HANDLE_LUT_DEFAULT_SIZE;
+}

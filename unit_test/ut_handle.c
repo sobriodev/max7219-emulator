@@ -130,7 +130,7 @@ void UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed(void)
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusWrongHandle, status);
 }
 
-void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDeafultSize(void)
+void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDefaultSize(void)
 {
     HANDLE_Init();
 
@@ -165,4 +165,12 @@ void UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterDealloc(void)
 
     size freeHandles = HANDLE_CountFree();
     TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, freeHandles);
+}
+
+void UT_CountAll_ByDefaultCorrectNumberIsReturned(void)
+{
+    HANDLE_Init();
+
+    size allHandles = HANDLE_CountAll();
+    TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, allHandles);
 }

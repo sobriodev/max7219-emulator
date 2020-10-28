@@ -16,9 +16,10 @@ int main(void)
 	RUN_TEST(UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed);
 	RUN_TEST(UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed);
 	RUN_TEST(UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed);
-	RUN_TEST(UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDeafultSize);
+	RUN_TEST(UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDefaultSize);
 	RUN_TEST(UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterAlloc);
 	RUN_TEST(UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterDealloc);
+	RUN_TEST(UT_CountAll_ByDefaultCorrectNumberIsReturned);
 
     return UNITY_END();
 }

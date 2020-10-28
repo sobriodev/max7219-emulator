@@ -29,9 +29,10 @@ void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed(void);
 void UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed(void);
-void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDeafultSize(void);
+void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDefaultSize(void);
 void UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterAlloc(void);
 void UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterDealloc(void);
+void UT_CountAll_ByDefaultCorrectNumberIsReturned(void);
 
 /* End of the tests declaration */
 
