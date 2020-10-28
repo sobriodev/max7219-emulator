@@ -56,6 +56,8 @@ static inline HANDLE_Status HANDLE_Alloc(HANDLE_Id* handle, size bytes)
 
 HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle);
 
+size HANDLE_CountFree(void);
+
 #if defined(__cplusplus)
 }
 #endif

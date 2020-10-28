@@ -111,3 +111,15 @@ HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
 
     return HANDLE_StatusOk;
 }
+
+size HANDLE_CountFree(void)
+{
+    size freeHandles = 0;
+    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
+        if (!handleToMemoryLut[i].occupied) {
+            ++freeHandles;
+        }
+    }
+
+    return freeHandles;
+}

@@ -7,6 +7,7 @@
 /* -------------------------------------------------------------------------- */
 
 #define TEST_ASSERT_HANDLE_EQ(EXP, ACT) TEST_ASSERT_EQUAL_INT64((EXP), (ACT))
+#define TEST_ASSERT_SIZE_EQ(EXP, ACT)   TEST_ASSERT_EQUAL_size_t((EXP), (ACT))
 
 /* -------------------------------------------------------------------------- */
 /* ---------------------------- Private functions --------------------------- */
@@ -127,4 +128,12 @@ void UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed(void)
     status = HANDLE_Dealloc(&someHugeHandle);
 
     TEST_ASSERT_STATUS_EQ(HANDLE_StatusWrongHandle, status);
+}
+
+void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDeafultSize(void)
+{
+    HANDLE_Init();
+
+    size numberOfFreeHandles = HANDLE_CountFree();
+    TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, numberOfFreeHandles);
 }

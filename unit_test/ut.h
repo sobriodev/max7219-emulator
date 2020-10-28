@@ -20,7 +20,7 @@ extern "C" {
 
 /* Put tests declaration here */
 
-/* HANDLE module */
+/* UT_HANDLE */
 void UT_HANDLE_Alloc_AfterFirstAllocationZeroHandleIsReturned(void);
 void UT_HANDLE_Alloc_HandlesAreReturnedInAscendingOrder(void);
 void UT_HANDLE_Alloc_NothingIsDoneWhenNullPointerIsPassed(void);
@@ -29,6 +29,7 @@ void UT_HANDLE_Dealloc_HandleCanBeUsedSecondTimeAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_HandleIsInvalidatedAfterItIsFreed(void);
 void UT_HANDLE_Dealloc_NothingIsDoneWhenNullPointerIsPassed(void);
 void UT_HANDLE_Dealloc_ErrStatusIsReturnedWhenInvalidHandleIsPassed(void);
+void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDeafultSize(void);
 
 /* End of the tests declaration */
 
