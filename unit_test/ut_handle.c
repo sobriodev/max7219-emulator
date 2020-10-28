@@ -137,3 +137,32 @@ void UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDeafultSize(void)
     size numberOfFreeHandles = HANDLE_CountFree();
     TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, numberOfFreeHandles);
 }
+
+void UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterAlloc(void)
+{
+    HANDLE_Init();
+
+    HANDLE_Id firstHandle;
+    HANDLE_Id secondHandle;
+    HANDLE_Alloc(&firstHandle, sizeof(u32));
+    HANDLE_Alloc(&secondHandle, 100);
+
+    size freeHandles = HANDLE_CountFree();
+    TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE - 2, freeHandles);
+
+    /* Dealloc handles to prevent memory leaks */
+    HANDLE_Dealloc(&firstHandle);
+    HANDLE_Dealloc(&secondHandle);
+}
+
+void UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterDealloc(void)
+{
+    HANDLE_Init();
+
+    HANDLE_Id handle;
+    HANDLE_Alloc(&handle, 1000);
+    HANDLE_Dealloc(&handle);
+
+    size freeHandles = HANDLE_CountFree();
+    TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, freeHandles);
+}
