@@ -19,7 +19,8 @@ int main(void)
 	RUN_TEST(UT_HANDLE_CountFree_ByDefaultReturnedNumberEqualsDefaultSize);
 	RUN_TEST(UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterAlloc);
 	RUN_TEST(UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterDealloc);
-	RUN_TEST(UT_CountAll_ByDefaultCorrectNumberIsReturned);
+	RUN_TEST(UT_HANDLE_CountAll_ByDefaultCorrectNumberIsReturned);
+	RUN_TEST(UT_HANDLE_DeallocAll_HandlesAreFreedAfterOperation);
 
     return UNITY_END();
 }

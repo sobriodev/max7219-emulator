@@ -167,10 +167,25 @@ void UT_HANDLE_CountFree_ReturnedNumberIsCorrectAfterDealloc(void)
     TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, freeHandles);
 }
 
-void UT_CountAll_ByDefaultCorrectNumberIsReturned(void)
+void UT_HANDLE_CountAll_ByDefaultCorrectNumberIsReturned(void)
 {
     HANDLE_Init();
 
     size allHandles = HANDLE_CountAll();
     TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, allHandles);
+}
+
+void UT_HANDLE_DeallocAll_HandlesAreFreedAfterOperation(void)
+{
+    HANDLE_Init();
+
+    HANDLE_Id handle;
+    HANDLE_Alloc(&handle, 100);
+    HANDLE_Alloc(&handle, 200);
+    HANDLE_Alloc(&handle, 100);
+    HANDLE_Alloc(&handle, 150);
+
+    /* Call dealloc function and check if all handles are freed */
+    HANDLE_DeallocAll();
+    TEST_ASSERT_SIZE_EQ(HANDLE_LUT_DEFAULT_SIZE, HANDLE_CountFree());
 }

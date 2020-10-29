@@ -60,6 +60,8 @@ size HANDLE_CountFree(void);
 
 size HANDLE_CountAll(void);
 
+void HANDLE_DeallocAll(void);
+
 #if defined(__cplusplus)
 }
 #endif

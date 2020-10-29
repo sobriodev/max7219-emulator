@@ -128,3 +128,17 @@ size HANDLE_CountAll(void)
 {
     return HANDLE_LUT_DEFAULT_SIZE;
 }
+
+void HANDLE_DeallocAll(void)
+{
+    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; i++) {
+        HandleToMemoryMapping* handle = &handleToMemoryLut[i];
+
+        /* Free memory and clean up fields */
+        free(handle->memory);
+        handle->memory = NULL;
+        handle->occupied = false;
+
+        /* TODO Combine this and HANDLE_Dealloc actions into one common fn */
+    }
+}
