@@ -65,6 +65,14 @@ static inline void InvalidateHandle(HANDLE_Id* handle)
     *handle = HANDLE_INVALID;
 }
 
+static inline void FreeHandle(HandleToMemoryMapping* handle)
+{
+    /* Free memory and eventually set info fields to defaults */
+    free(handle->memory);
+    handle->memory = NULL;
+    handle->occupied = false;
+}
+
 /* -------------------------------------------------------------------------- */
 /* ------------------------------- API functions ---------------------------- */
 /* -------------------------------------------------------------------------- */
@@ -102,9 +110,7 @@ HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
     COMMON_NULLPTR_GUARD(entry, HANDLE_StatusWrongHandle);
 
     /* Free memory and clean up fields */
-    free(entry->memory);
-    entry->memory = NULL;
-    entry->occupied = false;
+    FreeHandle(entry);
 
     /* Invalidate handle */
     InvalidateHandle(handle);
@@ -133,12 +139,6 @@ void HANDLE_DeallocAll(void)
 {
     for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; i++) {
         HandleToMemoryMapping* handle = &handleToMemoryLut[i];
-
-        /* Free memory and clean up fields */
-        free(handle->memory);
-        handle->memory = NULL;
-        handle->occupied = false;
-
-        /* TODO Combine this and HANDLE_Dealloc actions into one common fn */
+        FreeHandle(handle);
     }
 }
