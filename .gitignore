@@ -82,3 +82,9 @@ unit_test/cmake_install.cmake
 CMakeFiles/
 max7219-emulator
 unit_test/unit_test
+
+# Doxygen outputs
+src/latex/
+src/html/
+latex/
+html/
