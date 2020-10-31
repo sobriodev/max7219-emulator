@@ -137,7 +137,7 @@ size HANDLE_CountAll(void)
 
 void HANDLE_DeallocAll(void)
 {
-    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; i++) {
+    for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
         HandleToMemoryMapping* handle = &handleToMemoryLut[i];
         FreeHandle(handle);
     }
