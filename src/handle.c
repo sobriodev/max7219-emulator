@@ -23,7 +23,8 @@ static HandleToMemoryMapping handleToMemoryLut[HANDLE_LUT_DEFAULT_SIZE] = {0};
 /* ----------------------------- Private functions -------------------------- */
 /* -------------------------------------------------------------------------- */
 
-static void LutInit(HandleToMemoryMapping* lut, size sizeOfLut)
+/* Initialize handle mapping LUT */
+static void InitLut(HandleToMemoryMapping* lut, size sizeOfLut)
 {
     HandleToMemoryMapping *lutEntry;
     for (size i = 0; i < sizeOfLut; ++i) {
@@ -36,6 +37,7 @@ static void LutInit(HandleToMemoryMapping* lut, size sizeOfLut)
     }
 }
 
+/* Find first LUT entry with free handle */
 static HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
 {
     HandleToMemoryMapping *lutEntry = NULL;
@@ -48,6 +50,7 @@ static HandleToMemoryMapping* FindFirstEmptyLutEntry(void)
     return NULL;
 }
 
+/* Find LUT entry related to handle */
 static HandleToMemoryMapping* FindLutEntry(HANDLE_Id handle)
 {
     HandleToMemoryMapping *lutEntry = NULL;
@@ -60,12 +63,14 @@ static HandleToMemoryMapping* FindLutEntry(HANDLE_Id handle)
     return NULL;
 }
 
+/* Invalidate handle id */
 static inline void InvalidateHandle(HANDLE_Id* handle)
 {
     *handle = HANDLE_INVALID;
 }
 
-static inline void FreeHandle(HandleToMemoryMapping* handle)
+/* Free memory related to specific handle */
+static inline void FreeMemoryRelatedToHandle(HandleToMemoryMapping* handle)
 {
     /* Free memory and eventually set info fields to defaults */
     free(handle->memory);
@@ -79,7 +84,7 @@ static inline void FreeHandle(HandleToMemoryMapping* handle)
 
 void HANDLE_Init(void)
 {
-    LutInit(handleToMemoryLut, HANDLE_LUT_DEFAULT_SIZE);
+    InitLut(handleToMemoryLut, HANDLE_LUT_DEFAULT_SIZE);
 }
 
 HANDLE_Status HANDLE_AllocWithAllocator(
@@ -110,7 +115,7 @@ HANDLE_Status HANDLE_Dealloc(HANDLE_Id* handle)
     COMMON_NULLPTR_GUARD(entry, HANDLE_StatusWrongHandle);
 
     /* Free memory and clean up fields */
-    FreeHandle(entry);
+    FreeMemoryRelatedToHandle(entry);
 
     /* Invalidate handle */
     InvalidateHandle(handle);
@@ -139,6 +144,6 @@ void HANDLE_DeallocAll(void)
 {
     for (size i = 0; i < HANDLE_LUT_DEFAULT_SIZE; ++i) {
         HandleToMemoryMapping* handle = &handleToMemoryLut[i];
-        FreeHandle(handle);
+        FreeMemoryRelatedToHandle(handle);
     }
 }
